@@ -1,0 +1,227 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.master.cs" Inherits="Aromakart.User.User" %>
+<%@Import Namespace="Aromakart" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Manufacturer, Exporter and Wholesaler of Essential Oils, Carrier Oils, Fragrance Oils and more</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="https://www.aromakart.com/uploads/9e39bc14a8fdf4d657f7582cfdef773f.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <!-- Libraries Stylesheet -->
+    <link href="../UserTemplate/lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="../UserTemplate/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../UserTemplate/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="../UserTemplate/css/style.css" rel="stylesheet" />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <%--Extra sheets--%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet" />
+    
+    
+    
+    
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            max-width: 100%;
+            height: 20px;
+            width: 181px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <form id="form1" runat="server">
+
+
+        <%
+//string navClass = string.Empty;
+//if (Request.Url.AbsoluteUri.ToString().Contains("Default.aspx"))
+//{
+//    navClass = "show";
+//}
+//else
+//{
+//    navClass = "position-absolute";
+//}
+        %>
+
+
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-success" role="status" style="width: 3rem; height: 3rem;"></div>
+        </div>
+        <!-- Spinner End -->
+        <!-- Navbar Start -->
+        <div class="container-fluid bg-white shadow position-sticky">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg bg-white navbar-light py-2 py-lg-0">
+                    <a href="Default.aspx" class="navbar-brand">
+                        <img class="auto-style1" src="../UserTemplate/img/Aromalogo.png" alt="Logo" /><p style="padding-left: 9rem; font-family: 'Poor Richard';">Feel Sufi.....</p>
+                    </a>
+                    <button type="button" class="navbar-toggler ms-auto me-0" data-toggle="collapse" data-target="navbarCollapse" aria-controls="navbarCollapse" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-expanded="false" style="width: 44px; height: 40px; margin-right: 68">
+                        <span class="navbar-toggler-icon w-40 h-40" style="width: 0.8em; height: 1.6em"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav ms-auto">
+                            <a href="Default.aspx" class="nav-item nav-link">Home</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">AromaPages</a>
+                                <div class="dropdown-menu bg bg-gradient rounded-0 m-0">
+                                    <a href="Testimonial.aspx" class="dropdown-item">Testimonials</a>
+                                    <a href="Product.aspx" class="dropdown-item">Products</a>
+                                </div>
+                            </div>
+
+                            <a href="Store.aspx" class="nav-link">Store</a>
+                            <a href="Contact.aspx" class="nav-item nav-link">Contact Us</a>
+                        </div>
+
+
+                        <div class="border-start ps-4 d-none d-lg-block icon">
+
+                            <%-- <a href="Login.aspx" class="btn btn-outline-success"  role="link">Login</a>--%>
+                           <%-- <a href="Profile.aspx" class="btn btn-outline-cyan" role="link"><i class="fas fa-cart-plus"></i></a>--%>
+                        </div>
+                        <div class="user-content">
+                            <asp:LinkButton ID="lbCart" runat="server" ForeColor="Orange" PostBackUrl="~/User/Cart.aspx" >
+                                   <i class="fa fa-cart-plus" >
+                                       <span class="badge badge-warning text-white rounded-pill mb-2">
+                                       <% Response.Write(Session["cartCount"]); %>
+                                     </span>
+                                   </i>
+                            </asp:LinkButton>&nbsp
+                    <asp:LinkButton ID="lbRegisterOrProfile" runat="server"  ForeColor="Teal" OnClick="lbRegisterOrProfile_Click" CausesValidation="false">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </asp:LinkButton>&nbsp
+                    <asp:LinkButton ID="lbLoginOrLogout" CssClass="order_online btn btn-outline-dark" CausesValidation="false" OnClick="lbLoginOrLogout_Click" runat="server">
+
+                    </asp:LinkButton>
+                        </div>
+                        <%--<div class="form-inline">
+                    <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>--%>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+
+
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-success mb-4">Our Office</h4>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt text-success me-3"></i>At vjm pobandar-360575</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt text-success me-3"></i>+012 345 67890</p>
+                        <p class="mb-2"><i class="fa fa-envelope text-success me-3"></i>info@example.com</p>
+                        <div class="d-flex pt-3">
+                            <a class="btn btn-square btn-success rounded-circle me-2" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-success rounded-circle me-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square btn-success rounded-circle me-2" href="#"><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-square btn-success rounded-circle me-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-success mb-4">Quick Links</h4>
+                        <a class="btn btn-dark " href="Login.aspx">Admin Login</a>
+
+                        <%--                    <a class="btn btn-link" href="">Our Services</a>
+                    <a class="btn btn-link" href="">Terms & Condition</a>
+                    <a class="btn btn-link" href="">Support</a>--%>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-success mb-4">Business Hours</h4>
+                        <p class="mb-1">Monday - Friday</p>
+                        <h6 class="text-light">09:00 am - 07:00 pm</h6>
+                        <p class="mb-1">Saturday</p>
+                        <h6 class="text-light">09:00 am - 12:00 pm</h6>
+                        <p class="mb-1">Sunday</p>
+                        <h6 class="text-light">Closed</h6>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-success mb-4">SIGNUP</h4>
+                        <p>SIGNUP for DISCOUNT upto 70%</p>
+                        <div class="position-relative w-100">
+                            <input class="form-control bg-white w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-success py-2 position-absolute top-0 end-0 mt-2 me-2 "><a class="text-white" href="Signup.aspx">Signup</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- Copyright Start -->
+        <div class="container-fluid copyright py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="fw-bold link-light" href="#">Aromakart</a>, All Right Reserved.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        Designed By <a class="fw-medium link-light" href="#">Developer Dwarkesh</a> Distributed By <a class="fw-medium link-light" href="#">Team Professors</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn-success btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../UserTemplate/lib/wow/wow.min.js"></script>
+        <script src="../UserTemplate/lib/easing/easing.min.js"></script>
+        <script src="../UserTemplate/lib/waypoints/waypoints.min.js"></script>
+        <script src="../UserTemplate/lib/owlcarousel/owl.carousel.min.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="../UserTemplate/js/main.js"></script>
+
+    </form>
+</body>
+</html>
